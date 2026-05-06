@@ -13,7 +13,11 @@ FILE *file_open(void)
     return fopen(path, "r");
 }
 
-void file_close(FILE *file)
+void file_close(FILE **file)
 {
-    fclose(file);
+    if (file && *file)
+    {
+        fclose(*file);
+        *file = NULL;
+    }
 }

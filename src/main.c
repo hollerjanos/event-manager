@@ -10,7 +10,7 @@ int main(void)
     if (file)
     {
         printf("File opened successfully!\n");
-        file_close(file);
+        file_close(&file);
     }
 
     // struct event event;

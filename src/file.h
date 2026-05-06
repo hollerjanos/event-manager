@@ -7,6 +7,6 @@
 
 FILE *file_open(void);
 
-void file_close(FILE *file);
+void file_close(FILE **file);
 
 #endif
