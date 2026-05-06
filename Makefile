@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra
 RM = rm -f
 
 objects = bin/main.o\
-		  bin/event.o
+		  bin/event.o\
+		  bin/file.o
 
 all: bin/event-manager.out
 

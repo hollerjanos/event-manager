@@ -1,15 +1,25 @@
 #include <stdio.h>
 
-#include "event.h"
+// #include "event.h"
+
+#include "file.h"
 
 int main(void)
 {
-    struct event event;
+    FILE *file = file_open();
+    if (file)
+    {
+        printf("File opened successfully!\n");
+        file_close(file);
+    }
 
-    event = event_init();
+    // struct event event;
+    //
+    // event = event_init();
+    //
+    // printf("Title: %s\n", event.title);
+    // printf("Description: %s\n", event.description);
+    // printf("Type: %d\n", event.type);
 
-    printf("Title: %s\n", event.title);
-    printf("Description: %s\n", event.description);
-    printf("Type: %d\n", event.type);
     return 0;
 }
