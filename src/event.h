@@ -12,6 +12,8 @@ struct event {
     int type;
 };
 
-struct event event_init(void);
+struct event event_decode(char *line);
+
+void event_print(struct event event);
 
 #endif

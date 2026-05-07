@@ -10,21 +10,14 @@ int main(void)
 
     event_manager_init(&em);
 
-    file_get_events(&em);
+    if (file_get_events(&em) != FILE_STATUS_OK)
+    {
+        printf("There was a problem getting the data!\n");
+    }
+
+    event_manager_print(&em);
 
     event_manager_free(&em);
-
-    // struct event *events;
-
-    // file_get_events(events);
-
-    // struct event event;
-    //
-    // event = event_init();
-    //
-    // printf("Title: %s\n", event.title);
-    // printf("Description: %s\n", event.description);
-    // printf("Type: %d\n", event.type);
 
     return 0;
 }

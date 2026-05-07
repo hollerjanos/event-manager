@@ -14,8 +14,6 @@ void event_manager_init(struct event_manager *em);
 
 void event_manager_add(struct event_manager *em, struct event e);
 
-static void event_manager_increase_capacity(struct event_manager *em);
-
 void event_manager_free(struct event_manager *em);
 
 void event_manager_print(struct event_manager *em);
