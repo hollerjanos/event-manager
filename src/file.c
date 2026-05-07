@@ -23,7 +23,7 @@ static void file_close(FILE **file)
     }
 }
 
-enum file_status file_get_events(struct event events[EVENT_MAX])
+enum file_status file_get_events(struct event_manager *em)
 {
     FILE *file = file_open();
     if (!file) return FILE_STATUS_COULD_NOT_OPEN;
@@ -57,22 +57,11 @@ enum file_status file_get_events(struct event events[EVENT_MAX])
             index_token++;
         }
 
-        events[index_event] = event;
+        event_manager_add(em, event);
         index_event++;
     }
 
-    for (int i = 0; i < 2; i++)
-    {
-        printf("%d. event:\n", i);
-        printf("\t%d\n", events[i].id);
-        printf("\t%s\n", events[i].title);
-        printf("\t%s\n", events[i].description);
-        printf("\t%d\n", events[i].timestamp.tm_year);
-        printf("\t%d\n", events[i].timestamp.tm_mon);
-        printf("\t%d\n", events[i].timestamp.tm_mday);
-        printf("\t%d\n", events[i].type);
-        printf("\n");
-    }
+    event_manager_print(em);
 
     file_close(&file);
 

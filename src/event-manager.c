@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "event-manager.h"
 
@@ -28,4 +29,20 @@ void event_manager_free(struct event_manager *em)
 
     em->count = 0;
     em->events = NULL;
+}
+
+void event_manager_print(struct event_manager *em)
+{
+    for (size_t index = 0; index < em->count; index++)
+    {
+        printf("%lu. event:\n", index);
+        printf("\t%d\n", em->events[index].id);
+        printf("\t%s\n", em->events[index].title);
+        printf("\t%s\n", em->events[index].description);
+        printf("\t%d\n", em->events[index].timestamp.tm_year);
+        printf("\t%d\n", em->events[index].timestamp.tm_mon);
+        printf("\t%d\n", em->events[index].timestamp.tm_mday);
+        printf("\t%d\n", em->events[index].type);
+        printf("\n");
+    }
 }

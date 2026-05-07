@@ -18,4 +18,6 @@ static void event_manager_increase_capacity(struct event_manager *em);
 
 void event_manager_free(struct event_manager *em);
 
+void event_manager_print(struct event_manager *em);
+
 #endif

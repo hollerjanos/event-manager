@@ -3,11 +3,9 @@
 
 #include <stdio.h>
 
-#include "event.h"
+#include "event-manager.h"
 
 #define FILENAME ".events.txt"
-
-#define EVENT_MAX 100
 
 enum file_status {
     FILE_STATUS_OK = 0,
@@ -18,6 +16,6 @@ static FILE *file_open(void);
 
 static void file_close(FILE **file);
 
-enum file_status file_get_events(struct event events[EVENT_MAX]);
+enum file_status file_get_events(struct event_manager *em);
 
 #endif
