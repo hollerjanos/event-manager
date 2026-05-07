@@ -1,17 +1,14 @@
 #include <stdio.h>
 
-// #include "event.h"
+#include "event.h"
 
 #include "file.h"
 
 int main(void)
 {
-    FILE *file = file_open();
-    if (file)
-    {
-        printf("File opened successfully!\n");
-        file_close(&file);
-    }
+    struct event *events;
+
+    file_get_events(events);
 
     // struct event event;
     //
