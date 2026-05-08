@@ -3,6 +3,7 @@
 
 #include <sys/types.h>
 #include <time.h>
+#include <stdio.h>
 
 #define EVENT_DELIMITER ":"
 

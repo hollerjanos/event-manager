@@ -1,8 +1,9 @@
 #ifndef EVENT_MANAGER_H
 #define EVENT_MANAGER_H
 
-#include "event.h"
 #include <sys/types.h>
+
+#include "event.h"
 
 struct event_manager {
     struct event *events;

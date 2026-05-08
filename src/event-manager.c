@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "event-manager.h"
+#include "print.h"
 
 void event_manager_init(struct event_manager *em)
 {
@@ -39,10 +40,17 @@ void event_manager_free(struct event_manager *em)
 
 void event_manager_print(struct event_manager *em)
 {
+    if (print_init() == PAGER_STATUS_FAILED)
+    {
+        fprintf(stderr, "Couldn't initialize pager!\n");
+        return;
+    }
+
     for (size_t index = 0; index < em->count; index++)
     {
-        printf("%lu. event:\n", index);
+        if (index != 0) print("\n");
         event_print(em->events[index]);
-        printf("\n");
     }
+
+    print_close();
 }
