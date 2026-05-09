@@ -1,23 +1,48 @@
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "event-manager.h"
-
 #include "file.h"
 
 int main(void)
 {
-    struct event_manager em;
+        int result = EXIT_FAILURE;
 
-    event_manager_init(&em);
+        printf("Event-Manager initialization...\n");
+        if (event_manager_init() != EVENT_MANAGER_STATUS_OK)
+        {
+                fprintf(stderr, "Event-Manager initialization failed!\n");
+                goto cleanup;
+        }
 
-    if (file_get_events(&em) != FILE_STATUS_OK)
-    {
-        printf("There was a problem getting the data!\n");
-    }
+        printf("File initialization...\n");
+        if (file_init() != FILE_STATUS_OK)
+        {
+                fprintf(stderr, "File initialization failed!\n");
+                goto cleanup;
+        }
 
-    event_manager_print(&em);
+        printf("Getting the events...\n");
+        if (file_get_events() != FILE_STATUS_OK)
+        {
+                fprintf(stderr, "Couldn't get the events!\n");
+        }
 
-    event_manager_free(&em);
+        printf("Printing the events...\n");
+        if (event_manager_print() != EVENT_MANAGER_STATUS_OK)
+        {
+                fprintf(stderr, "Couldn't print the events!\n");
+        }
 
-    return 0;
+        result = EXIT_SUCCESS;
+
+cleanup:
+
+        printf("Event-Manager freeing!\n");
+        event_manager_free();
+
+        printf("File freeing!\n");
+        file_free();
+
+        return result;
 }

@@ -1,21 +1,28 @@
 #ifndef EVENT_MANAGER_H
 #define EVENT_MANAGER_H
 
-#include "event.h"
 #include <sys/types.h>
 
-struct event_manager {
-    struct event *events;
-    size_t count;
-    size_t capacity;
+#include "event.h"
+
+enum event_manager_status {
+        EVENT_MANAGER_STATUS_OK = 0,
+        EVENT_MANAGER_STATUS_FAILED,
+        EVENT_MANAGER_STATUS_ALREADY_INITIALIZED
 };
 
-void event_manager_init(struct event_manager *em);
+struct event_manager {
+        struct event *events;
+        size_t count;
+        size_t capacity;
+};
 
-void event_manager_add(struct event_manager *em, struct event e);
+enum event_manager_status event_manager_init(void);
 
-void event_manager_free(struct event_manager *em);
+void event_manager_add(struct event e);
 
-void event_manager_print(struct event_manager *em);
+void event_manager_free(void);
+
+enum event_manager_status event_manager_print(void);
 
 #endif

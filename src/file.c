@@ -3,48 +3,56 @@
 
 #include "file.h"
 
-static FILE *file_open(void)
+static FILE *file = NULL;
+
+enum file_status file_init(void)
 {
-    const char *home = getenv("HOME");
-    if (!home) return NULL;
+        if (file)
+                return FILE_STATUS_ALREADY_INITIALIZED;
 
-    char path[MAX_PATH_SIZE];
-    snprintf(path, sizeof(path), "%s/%s", home, FILENAME);
+        const char *home = getenv("HOME");
+        if (!home)
+                return FILE_STATUS_HOME_UNKNOWN;
 
-    return fopen(path, "r");
+        char path[MAX_PATH_SIZE];
+        snprintf(path, sizeof(path), "%s/%s", home, FILENAME);
+
+        file = fopen(path, "a+");
+        if (!file)
+                return FILE_STATUS_FAILED;
+
+        return FILE_STATUS_OK;
 }
 
-static void file_close(FILE **file)
+void file_free(void)
 {
-    if (file && *file)
-    {
-        fclose(*file);
-        *file = NULL;
-    }
+        if (file)
+        {
+                fclose(file);
+                file = NULL;
+        }
 }
 
-static void file_process_lines(FILE *file, struct event_manager *em)
+static void file_process_lines(void)
 {
-    char line[MAX_LINE_SIZE];
+        char line[MAX_LINE_SIZE];
 
-    struct event event;
+        struct event event;
 
-    while (fgets(line, MAX_LINE_SIZE, file))
-    {
-        event = event_decode(line);
-        
-        event_manager_add(em, event);
-    }
+        while (fgets(line, MAX_LINE_SIZE, file))
+        {
+                event = event_decode(line);
+
+                event_manager_add(event);
+        }
 }
 
-enum file_status file_get_events(struct event_manager *em)
+enum file_status file_get_events(void)
 {
-    FILE *file = file_open();
-    if (!file) return FILE_STATUS_COULD_NOT_OPEN;
+        if (!file)
+                return FILE_STATUS_FAILED;
 
-    file_process_lines(file, em);
+        file_process_lines();
 
-    file_close(&file);
-
-    return FILE_STATUS_OK;
+        return FILE_STATUS_OK;
 }

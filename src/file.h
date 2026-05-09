@@ -11,10 +11,16 @@
 #define MAX_LINE_SIZE 255
 
 enum file_status {
-    FILE_STATUS_OK = 0,
-    FILE_STATUS_COULD_NOT_OPEN
+        FILE_STATUS_OK,
+        FILE_STATUS_FAILED,
+        FILE_STATUS_ALREADY_INITIALIZED,
+        FILE_STATUS_HOME_UNKNOWN
 };
 
-enum file_status file_get_events(struct event_manager *em);
+enum file_status file_init(void);
+
+void file_free(void);
+
+enum file_status file_get_events(void);
 
 #endif
