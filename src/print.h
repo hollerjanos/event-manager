@@ -1,18 +1,16 @@
 #ifndef PRINT_H
 #define PRINT_H
 
-#include <stdio.h>
-
-enum pager_status {
-    PAGER_STATUS_OK = 0,
-    PAGER_STATUS_ALREADY_INITIALIZED,
-    PAGER_STATUS_FAILED
+enum print_status {
+        PRINT_STATUS_OK = 0,
+        PRINT_STATUS_FAILED,
+        PRINT_STATUS_ALREADY_INITIALIZED
 };
 
-enum pager_status print_init(void);
+enum print_status print_init(void);
 
 void print(const char *format, ...);
 
-void print_close(void);
+void print_free(void);
 
 #endif

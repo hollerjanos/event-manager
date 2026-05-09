@@ -1,40 +1,42 @@
+#include <stdio.h>
 #include <stdarg.h>
 
 #include "print.h"
 
-#define DEFAULT_PAGER "less -R"
+#define PAGER_DEFAULT "less -R"
 
 static FILE *pager = NULL;
 
-enum pager_status print_init(void)
+enum print_status print_init(void)
 {
-    if (pager)
-        return PAGER_STATUS_ALREADY_INITIALIZED;
+        if (pager)
+                return PRINT_STATUS_ALREADY_INITIALIZED;
 
-    pager = popen(DEFAULT_PAGER, "w");
-    if (!pager)
-        return PAGER_STATUS_FAILED;
+        pager = popen(PAGER_DEFAULT, "w");
 
-    return PAGER_STATUS_OK;
+        if (!pager)
+                return PRINT_STATUS_FAILED;
+
+        return PRINT_STATUS_OK;
 }
 
 void print(const char *format, ...)
 {
-    if (!pager)
-        return;
+        if (!pager)
+                return;
 
-    va_list args;
+        va_list args;
 
-    va_start(args, format);
-    vfprintf(pager, format, args);
-    va_end(args);
+        va_start(args, format);
+        vfprintf(pager, format, args);
+        va_end(args);
 }
 
-void print_close(void)
+void print_free(void)
 {
-    if (pager)
-    {
+        if (!pager)
+                return;
+
         pclose(pager);
         pager = NULL;
-    }
 }
