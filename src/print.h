@@ -2,9 +2,9 @@
 #define PRINT_H
 
 enum print_status {
-        PRINT_STATUS_OK = 0,
-        PRINT_STATUS_FAILED,
-        PRINT_STATUS_ALREADY_INITIALIZED
+	PRINT_STATUS_OK = 0,
+	PRINT_STATUS_FAILED,
+	PRINT_STATUS_ALREADY_INITIALIZED
 };
 
 enum print_status print_init(void);
