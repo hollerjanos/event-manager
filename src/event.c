@@ -75,16 +75,24 @@ static inline char *event_get_type_as_string(enum event_type t)
 
 void event_print(struct event e)
 {
-	print(COLOR_BLUE "ID:\t\t" COLOR_GREEN "%d\n", e.id);
-	print(COLOR_BLUE "Title:\t\t" COLOR_MAGENTA "%s\n", e.title);
-	print(COLOR_BLUE "Description:\t" COLOR_CYAN "%s\n", e.description);
-	print(COLOR_BLUE "Timestamp:\t" COLOR_YELLOW "%d-%02d-%02d %02d:%02d:%02d\n",
-		e.timestamp.tm_year,
-		e.timestamp.tm_mon,
-		e.timestamp.tm_mday,
-		e.timestamp.tm_hour,
-		e.timestamp.tm_min,
-		e.timestamp.tm_sec);
-	print(COLOR_BLUE "Type:\t\t" COLOR_RED "%s\n",
-		event_get_type_as_string(e.type));
+	print(COLOR_BLUE "ID:\t\t"
+	      COLOR_GREEN "%d\n",
+	      e.id);
+	print(COLOR_BLUE "Title:\t\t"
+	      COLOR_MAGENTA "%s\n",
+	      e.title);
+	print(COLOR_BLUE "Description:\t"
+	      COLOR_CYAN "%s\n",
+	      e.description);
+	print(COLOR_BLUE "Timestamp:\t"
+	      COLOR_YELLOW "%d-%02d-%02d %02d:%02d:%02d\n",
+	      e.timestamp.tm_year,
+	      e.timestamp.tm_mon,
+	      e.timestamp.tm_mday,
+	      e.timestamp.tm_hour,
+	      e.timestamp.tm_min,
+	      e.timestamp.tm_sec);
+	print(COLOR_BLUE "Type:\t\t"
+	      COLOR_RED "%s\n",
+	      event_get_type_as_string(e.type));
 }
