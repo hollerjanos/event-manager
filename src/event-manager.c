@@ -9,7 +9,8 @@
 
 static struct event_manager em = {0};
 
-enum event_manager_status event_manager_init(void)
+enum event_manager_status
+event_manager_init(void)
 {
 	if (em.events)
 		return EVENT_MANAGER_STATUS_ALREADY_INITIALIZED;
@@ -25,18 +26,21 @@ enum event_manager_status event_manager_init(void)
 	return EVENT_MANAGER_STATUS_OK;
 }
 
-static inline bool event_manager_is_full(void)
+static inline bool
+event_manager_is_full(void)
 {
 	return em.count == em.capacity;
 }
 
-static void event_manager_increase_capacity(void)
+static void
+event_manager_increase_capacity(void)
 {
 	em.capacity *= 2;
 	em.events = realloc(em.events, sizeof(struct event) * em.capacity);
 }
 
-void event_manager_add(struct event e)
+void
+event_manager_add(struct event e)
 {
 	if (event_manager_is_full())
 		event_manager_increase_capacity();
@@ -44,7 +48,8 @@ void event_manager_add(struct event e)
 	em.events[em.count++] = e;
 }
 
-void event_manager_free(void)
+void
+event_manager_free(void)
 {
 	free(em.events);
 
@@ -52,7 +57,8 @@ void event_manager_free(void)
 	em.events = NULL;
 }
 
-enum event_manager_status event_manager_print(void)
+enum event_manager_status
+event_manager_print(void)
 {
 	if (print_init() != PRINT_STATUS_OK)
 		return EVENT_MANAGER_STATUS_FAILED;

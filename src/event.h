@@ -32,8 +32,10 @@ struct event {
 	enum event_type type;
 };
 
-struct event event_decode(char *line);
+struct event
+event_decode(char *line);
 
-void event_print(struct event e);
+void
+event_print(struct event e);
 
 #endif

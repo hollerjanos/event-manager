@@ -9,8 +9,10 @@ enum print_status {
 
 enum print_status print_init(void);
 
-void print(const char *format, ...);
+void
+print(const char *format, ...);
 
-void print_free(void);
+void
+print_free(void);
 
 #endif

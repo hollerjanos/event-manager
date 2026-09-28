@@ -17,12 +17,16 @@ struct event_manager {
 	size_t capacity;
 };
 
-enum event_manager_status event_manager_init(void);
+enum event_manager_status
+event_manager_init(void);
 
-void event_manager_add(struct event e);
+void
+event_manager_add(struct event e);
 
-void event_manager_free(void);
+void
+event_manager_free(void);
 
-enum event_manager_status event_manager_print(void);
+enum
+event_manager_status event_manager_print(void);
 
 #endif

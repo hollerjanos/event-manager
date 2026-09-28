@@ -8,7 +8,8 @@
 
 #define EVENT_DELIMITER ":"
 
-static void event_set_event_data_by_part(struct event *e, size_t i, char *d)
+static void
+event_set_event_data_by_part(struct event *e, size_t i, char *d)
 {
 	switch (i)
 	{
@@ -45,7 +46,8 @@ static void event_set_event_data_by_part(struct event *e, size_t i, char *d)
 	}
 }
 
-struct event event_decode(char *line)
+struct event
+event_decode(char *line)
 {
 	struct event e;
 
@@ -62,18 +64,24 @@ struct event event_decode(char *line)
 	return e;
 }
 
-static inline char *event_get_type_as_string(enum event_type t)
+static inline char *
+event_get_type_as_string(enum event_type t)
 {
 	switch (t)
 	{
-		case EVENT_TYPE_BIRTHDAY: return "Birthday";
-		case EVENT_TYPE_NAME_DAY: return "Name day";
-		case EVENT_TYPE_ANNIVERSARY: return "Anniversary";
-		default: return "Unknown";
+		case EVENT_TYPE_BIRTHDAY:
+			return "Birthday";
+		case EVENT_TYPE_NAME_DAY:
+			return "Name day";
+		case EVENT_TYPE_ANNIVERSARY:
+			return "Anniversary";
+		default:
+			return "Unknown";
 	}
 }
 
-void event_print(struct event e)
+void
+event_print(struct event e)
 {
 	print(COLOR_BLUE "ID:\t\t"
 	      COLOR_GREEN "%d\n",

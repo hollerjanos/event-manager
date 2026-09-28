@@ -7,10 +7,11 @@
 
 static FILE *pager = NULL;
 
-enum print_status print_init(void)
+enum print_status
+print_init(void)
 {
 	if (pager)
-                return PRINT_STATUS_ALREADY_INITIALIZED;
+		return PRINT_STATUS_ALREADY_INITIALIZED;
 
 	pager = popen(PAGER_DEFAULT, "w");
 
@@ -20,7 +21,8 @@ enum print_status print_init(void)
 	return PRINT_STATUS_OK;
 }
 
-void print(const char *format, ...)
+void
+print(const char *format, ...)
 {
 	if (!pager)
 		return;
@@ -32,7 +34,8 @@ void print(const char *format, ...)
 	va_end(args);
 }
 
-void print_free(void)
+void
+print_free(void)
 {
 	if (!pager)
 		return;

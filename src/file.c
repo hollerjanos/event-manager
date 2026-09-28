@@ -2,10 +2,12 @@
 #include <string.h>
 
 #include "file.h"
+#include "event-manager.h"
 
 static FILE *file = NULL;
 
-enum file_status file_init(void)
+enum file_status
+file_init(void)
 {
 	if (file)
 		return FILE_STATUS_ALREADY_INITIALIZED;
@@ -24,7 +26,8 @@ enum file_status file_init(void)
 	return FILE_STATUS_OK;
 }
 
-void file_free(void)
+void
+file_free(void)
 {
 	if (file)
 	{
@@ -33,7 +36,8 @@ void file_free(void)
 	}
 }
 
-static void file_process_lines(void)
+static void
+file_process_lines(void)
 {
 	char line[MAX_LINE_SIZE];
 
@@ -47,7 +51,8 @@ static void file_process_lines(void)
 	}
 }
 
-enum file_status file_get_events(void)
+enum file_status
+file_get_events(void)
 {
 	if (!file)
 		return FILE_STATUS_FAILED;

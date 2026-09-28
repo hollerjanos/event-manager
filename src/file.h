@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-#include "event-manager.h"
-
 #define FILENAME ".events.txt"
 
 #define MAX_PATH_SIZE 512
@@ -17,10 +15,13 @@ enum file_status {
 	FILE_STATUS_HOME_UNKNOWN
 };
 
-enum file_status file_init(void);
+enum file_status
+file_init(void);
 
-void file_free(void);
+void
+file_free(void);
 
-enum file_status file_get_events(void);
+enum file_status
+file_get_events(void);
 
 #endif
